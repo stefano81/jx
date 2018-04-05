@@ -34,13 +34,14 @@ const (
 	ORACLE     = "oracle"
 	IBM        = "ibm"
 	JX_INFRA   = "jx-infra"
+	BX         = "bx"
 
 	optionKubernetesVersion = "kubernetes-version"
 	optionNodes             = "nodes"
 	optionClusterName       = "cluster-name"
 )
 
-var KUBERNETES_PROVIDERS = []string{MINIKUBE, GKE, OKE, AKS, AWS, EKS, KUBERNETES, IBM, OPENSHIFT, MINISHIFT, JX_INFRA, PKS}
+var KUBERNETES_PROVIDERS = []string{MINIKUBE, BX, GKE, OKE, AKS, AWS, EKS, KUBERNETES, IBM, OPENSHIFT, MINISHIFT, JX_INFRA, PKS}
 
 const (
 	stableKubeCtlVersionURL = "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
@@ -124,6 +125,7 @@ func NewCmdCreateCluster(f Factory, out io.Writer, errOut io.Writer) *cobra.Comm
 	cmd.AddCommand(NewCmdCreateClusterAWS(f, out, errOut))
 	cmd.AddCommand(NewCmdCreateClusterEKS(f, out, errOut))
 	cmd.AddCommand(NewCmdCreateClusterGKE(f, out, errOut))
+	cmd.AddCommand(NewCmdCreateClusterBX(f, out, errOut))
 	cmd.AddCommand(NewCmdCreateClusterMinikube(f, out, errOut))
 	cmd.AddCommand(NewCmdCreateClusterMinishift(f, out, errOut))
 	cmd.AddCommand(NewCmdCreateClusterOKE(f, out, errOut))
