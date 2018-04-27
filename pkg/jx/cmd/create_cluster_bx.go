@@ -233,7 +233,13 @@ func (o *CreateClusterBXOptions) createClusterBX() error {
 	}
 
 	key, value := extractEnvironmentVariable(output)
-	os.Setenv(key, value)
+	err = os.Setenv(key, value)
+
+	if err != nil {
+		log.Errorf("error setting environment variable %v", err)
+		return err
+	}
+	log.Errorf(" EVERYTHING FINE")
 
 	context, err := o.getCommandOutput("", "kubectl", "config", "current-context")
 	if err != nil {
